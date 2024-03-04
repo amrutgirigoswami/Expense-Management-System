@@ -20,9 +20,7 @@ app.use(cors());
 
 
 //routes
-app.get('/',(req,res)=>{
-    res.send("<h1>Hello From server</h1>")
-})
+app.use('/api/v1/users',require('./routes/userRoutes'))
 
 //port
 

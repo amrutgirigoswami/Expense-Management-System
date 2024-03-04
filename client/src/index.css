@@ -12,3 +12,35 @@
   background: #b21d3b !important;
   
 }
+
+.register_page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+.register_btn{
+  background: #22326e;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+.register_btn:hover{
+  background: #22326e;
+  color: #fff;
+}
+
+.login_btn{
+  background: #b21d3b;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+
+.login_btn:hover{
+  background: #b21d3b;
+  color: #fff;
+
+}
