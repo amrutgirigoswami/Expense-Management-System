@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Form, Input, message } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
@@ -13,14 +13,20 @@ const Login = () => {
           const {data}=await axios.post('/users/login',values)
           message.success("Login Successfully");
           setLoading(false);
-          localStorage.setItem('user',JSON.stringify({...data, password:''}))
+          localStorage.setItem('user',JSON.stringify({...data.user, password:''}))
           navigate('/')
        } catch (error) {
         setLoading(false);
         message.error("Invalid Login Credentials");
        }
     }
-
+  // Prevent Display
+  useEffect(()=>{
+    if(localStorage.getItem('user'))
+    {
+       navigate('/')
+    } 
+  },[navigate])
   return (
     <>
         <div className='register_page'>

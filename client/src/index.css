@@ -44,3 +44,15 @@
   color: #fff;
 
 }
+
+
+.logout_btn{
+  background: #22326e;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+.logout_btn:hover{
+  background: #22326e;
+  color: #fff;
+}
