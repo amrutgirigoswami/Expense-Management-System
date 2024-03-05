@@ -6,6 +6,6 @@ const { addTransection, getAllTransection } = require("../controllers/transectio
 const router =express.Router();
 
 router.post('/add-transection', addTransection);
-router.get('/get-all-transections',getAllTransection);
+router.post('/get-transections',getAllTransection);
 
 module.exports = router

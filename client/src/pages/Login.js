@@ -11,6 +11,8 @@ const Login = () => {
        try {
           setLoading(true);
           const {data}=await axios.post('/users/login',values)
+
+          //console.log("login log :",data);
           message.success("Login Successfully");
           setLoading(false);
           localStorage.setItem('user',JSON.stringify({...data.user, password:''}))
