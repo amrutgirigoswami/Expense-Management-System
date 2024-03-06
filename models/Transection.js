@@ -1,36 +1,36 @@
 const mongoose = require('mongoose');
 
 const transectionSchema = new mongoose.Schema({
-    user_id:{
-        type:String,
-        require:[true,'user ID is required']
+    user_id: {
+        type: String,
+        require: [true, 'user ID is required']
     },
-    amount:{
-        type:Number,
-        require:[true,'amount is required']
+    amount: {
+        type: Number,
+        require: [true, 'amount is required']
     },
-    type:{
-        type:String,
-        require:[true,'type is required']
+    type: {
+        type: String,
+        require: [true, 'type is required']
     },
-    category:{
-        type:String,
-        require:[true,'category is required']
+    category: {
+        type: String,
+        require: [true, 'category is required']
     },
-    refrence:{
-        type:String
+    refrence: {
+        type: String
     },
-    description:{
-        type:String,
-        require:[true,'description is require']
+    description: {
+        type: String,
+        require: [true, 'description is require']
     },
-    date:{
-        type:String,
-        require:[true,'date is require']
+    date: {
+        type: Date,
+        require: [true, 'date is require']
     }
-},{timestamps:true});
+}, { timestamps: true });
 
 
- const transectionModel = mongoose.model('transections',transectionSchema)
+const transectionModel = mongoose.model('transections', transectionSchema)
 
- module.exports = transectionModel;
+module.exports = transectionModel;

@@ -3,9 +3,9 @@ const { addTransection, getAllTransection } = require("../controllers/transectio
 
 
 
-const router =express.Router();
+const router = express.Router();
 
-router.post('/add-transection', addTransection);
-router.post('/get-transections',getAllTransection);
+router.post('/add-transections', addTransection);
+router.post('/get-transections', getAllTransection);
 
 module.exports = router

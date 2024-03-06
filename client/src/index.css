@@ -5,7 +5,7 @@
 }
 
 .content{
-  height: 87vh;
+  height: 100vh;
 }
 
 .navbar {
@@ -75,4 +75,24 @@
   justify-content: space-between;
   padding: 15px 20px;
   box-shadow: 0 0 3px gray;
+}
+
+.switch-icon{
+  border:1px solid rgb(0, 0, 0,0.677) ;
+  border-radius: 5px;
+  padding: 15px 15px;
+}
+
+
+.andicon svg{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.active-icon{
+  color: black;
+}
+
+.inactive-icon {
+  color:gray;
 }
