@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import moment from 'moment';
 import axios from 'axios';
 import { Modal, Form, Input, Select, message, Table, DatePicker } from 'antd'
-import { UnorderedListOutlined, AreaChartOutlined } from '@ant-design/icons'
+import { UnorderedListOutlined, AreaChartOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Layouts from '../components/Layout/layouts'
 import Spinner from '../components/Spinner';
 import Analytics from '../components/Analytics';
@@ -16,6 +16,8 @@ const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState([]);
   const [type, setType] = useState('all');
   const [viewData, setViewData] = useState('table');
+  const [editable, setEditable] = useState(null);
+
   const columns = [
     {
       title: 'Date',
@@ -40,6 +42,15 @@ const HomePage = () => {
     },
     {
       title: 'Actions',
+      render: (text, record) => (
+        <div>
+          <EditOutlined onClick={() => {
+            setEditable(record)
+            setShowModal(true)
+          }} />
+          <DeleteOutlined className='mx-2' onClick={() => { handleDelete(record) }} />
+        </div>
+      )
     },
   ]
 
@@ -76,14 +87,39 @@ const HomePage = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       setLoading(true);
-      await axios.post('/transections/add-transections', { ...values, user_id: user._id });
-      setLoading(false);
-      message.success("Transection Added Successfully");
+      if (editable) {
+        await axios.post('/transections/edit-transections', {
+          payload: {
+            ...values, user_id: user._id
+          },
+          transactionId: editable._id
+        });
+        setLoading(false);
+        message.success("Transection Updated Successfully");
+      } else {
+        await axios.post('/transections/add-transections', { ...values, user_id: user._id });
+        setLoading(false);
+        message.success("Transection Added Successfully");
+      }
       setShowModal(false);
+      setEditable(null)
     } catch (error) {
       message.error("Failed to add Transections");
       setLoading(false);
       setShowModal(false);
+    }
+  }
+
+  const handleDelete = async (record) => {
+    try {
+      setLoading(true)
+      await axios.post('/transections/delete-transections', { transactionId: record._id })
+      setLoading(false);
+      message.success("Transection Deleted Successfully");
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+      message.error("Unable to Delete")
     }
   }
 
@@ -122,8 +158,8 @@ const HomePage = () => {
 
       </div>
 
-      <Modal title="Add Transection" open={showModal} onCancel={() => setShowModal(false)} footer={false}>
-        <Form layout='vertical' onFinish={handleSubmit}>
+      <Modal title={editable ? "Edit Transection" : "Add Transection"} open={showModal} onCancel={() => setShowModal(false)} footer={false}>
+        <Form layout='vertical' onFinish={handleSubmit} initialValues={editable}>
           <Form.Item label="Amount" name="amount">
             <Input type='text' />
           </Form.Item>

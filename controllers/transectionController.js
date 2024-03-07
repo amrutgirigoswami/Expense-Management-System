@@ -41,4 +41,24 @@ const addTransection = async (req, res) => {
     }
 }
 
-module.exports = { getAllTransection, addTransection };
+const editTransection = async (req, res) => {
+    try {
+        await transectionModel.findByIdAndUpdate({ _id: req.body.transactionId }, req.body.payload)
+        res.status(200).send("Updated Successfully")
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+const deleteTransection = async (req, res) => {
+    try {
+        await transectionModel.findByIdAndDelete({ _id: req.body.transactionId })
+        res.status(200).send("Deleted Successfully")
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+module.exports = { getAllTransection, addTransection, editTransection, deleteTransection };

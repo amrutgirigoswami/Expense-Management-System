@@ -33,17 +33,12 @@
 }
 
 .login_btn{
-  background: #b21d3b;
-  color: #fff;
   outline: none;
-  border: none;
+    border: none;
+    width: 100%;
 }
 
-.login_btn:hover{
-  background: #b21d3b;
-  color: #fff;
 
-}
 
 
 .logout_btn{
